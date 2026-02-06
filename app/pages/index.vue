@@ -103,8 +103,7 @@ function sendMessage(message) {
                         @mouseup="sendMessage('STOP')"
                         @mouseleave="sendMessage('STOP')"
                         @touchstart="sendMessage('BACKWARD')"
-                        @touchend="sendMessage('STOP')"
-                       >
+                        @touchend="sendMessage('STOP')">
                BACK
             </BaseButton>
 
@@ -112,8 +111,7 @@ function sendMessage(message) {
                         @mouseup="sendMessage('STOP')"
                         @mouseleave="sendMessage('STOP')"
                         @touchstart="sendMessage('FORWARD')"
-                        @touchend="sendMessage('STOP')"
-                        >
+                        @touchend="sendMessage('STOP')">
                FRONT
             </BaseButton>
          </div>
