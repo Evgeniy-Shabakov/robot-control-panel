@@ -44,13 +44,13 @@ function findWebSocketAndConnect() {
    }
 }
 
-function sendMessage(message) {
+async function sendMessage(message) {
    if (!connection.value || connection.value.readyState !== WebSocket.OPEN) {
       messages.value.push('Ошибка: соединение не установлено')
       return
    }
 
-   connection.value.send(message)
+   await connection.value.send(message)
    messages.value.push(`Отправлено:  ${message}`)
 }
 </script>
