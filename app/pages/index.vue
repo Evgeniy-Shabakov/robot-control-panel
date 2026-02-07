@@ -56,13 +56,13 @@ function sendMessage(message) {
 </script>
 
 <template>
-   <div class="p-2 h-screen flex flex-col gap-2">
+   <div class="p-2 min-h-dvh flex flex-col gap-2">
 
       <header class="border p-2 rounded-md">WebSocket статус: {{ wsConnectionStatus }}</header>
 
       <main class="border p-2 rounded-md flex-1 overflow-auto">
          <h4>Сообщения:</h4>
-         <div>
+         <div class="text-sm">
             <ul>
                <li v-for="(msg, index) in reversedMessages"
                    :key="index"
