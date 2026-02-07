@@ -56,68 +56,70 @@ function sendMessage(message) {
 </script>
 
 <template>
-   <div class="p-2 min-h-dvh flex flex-col gap-2">
 
-      <header class="border p-2 rounded-md">WebSocket статус: {{ wsConnectionStatus }}</header>
+   <header class="border m-2 p-2 rounded-md">WebSocket статус: {{ wsConnectionStatus }}</header>
 
-      <main class="border p-2 rounded-md flex-1 overflow-auto">
-         <h4>Сообщения:</h4>
-         <div class="text-sm">
-            <ul>
-               <li v-for="(msg, index) in reversedMessages"
-                   :key="index"
-                   class="whitespace-pre-wrap"
-                   :class="{
-                     'text-green-600': msg.includes('Получено'),
-                     'text-blue-600': msg.includes('Отправлено')
-                  }">
-                  {{ msg }}
-               </li>
-            </ul>
-         </div>
-      </main>
+   <main class="m-2">
+      <h4>Сообщения:</h4>
+      <div class="text-sm border p-2 min-h-50 max-h-50 rounded-md overflow-auto">
+         <ul>
+            <li v-for="(msg, index) in reversedMessages"
+                :key="index"
+                class="whitespace-pre-wrap"
+                :class="{
+                  'text-green-600': msg.includes('Получено'),
+                  'text-blue-600': msg.includes('Отправлено')
+               }">
+               {{ msg }}
+            </li>
+         </ul>
+      </div>
+   </main>
 
-      <footer class=" p-2  w-full flex gap-4 justify-between">
-         <div class="flex gap-4">
-            <BaseButton @mousedown="sendMessage('LEFT')"
-                        @mouseup="sendMessage('STOP')"
-                        @mouseleave="sendMessage('STOP')"
-                        @touchstart.prevent="sendMessage('LEFT')"
-                        @touchend.prevent="sendMessage('STOP')"
-                        @touchcancel.prevent="sendMessage('STOP')">
-               LEFT
-            </BaseButton>
+   <footer class="fixed bottom-0 p-2 w-full flex gap-4 justify-between">
+      <div class="flex gap-3">
+         <BaseButton class="w-20"
+                     @mousedown="sendMessage('LEFT')"
+                     @mouseup="sendMessage('STOP')"
+                     @mouseleave="sendMessage('STOP')"
+                     @touchstart.prevent="sendMessage('LEFT')"
+                     @touchend.prevent="sendMessage('STOP')"
+                     @touchcancel.prevent="sendMessage('STOP')">
+            LEFT
+         </BaseButton>
 
-            <BaseButton @mousedown="sendMessage('RIGHT')"
-                        @mouseup="sendMessage('STOP')"
-                        @mouseleave="sendMessage('STOP')"
-                        @touchstart.prevent="sendMessage('RIGHT')"
-                        @touchend.prevent="sendMessage('STOP')"
-                        @touchcancel.prevent="sendMessage('STOP')">
-               RIGHT
-            </BaseButton>
-         </div>
+         <BaseButton class="w-20"
+                     @mousedown="sendMessage('RIGHT')"
+                     @mouseup="sendMessage('STOP')"
+                     @mouseleave="sendMessage('STOP')"
+                     @touchstart.prevent="sendMessage('RIGHT')"
+                     @touchend.prevent="sendMessage('STOP')"
+                     @touchcancel.prevent="sendMessage('STOP')">
+            RIGHT
+         </BaseButton>
+      </div>
 
-         <div class="flex  gap-4">
-            <BaseButton @mousedown="sendMessage('BACKWARD')"
-                        @mouseup="sendMessage('STOP')"
-                        @mouseleave="sendMessage('STOP')"
-                        @touchstart.prevent="sendMessage('BACKWARD')"
-                        @touchend.prevent="sendMessage('STOP')"
-                        @touchcancel.prevent="sendMessage('STOP')">
-               BACK
-            </BaseButton>
+      <div class="flex  gap-3">
+         <BaseButton class="w-20"
+                     @mousedown="sendMessage('BACKWARD')"
+                     @mouseup="sendMessage('STOP')"
+                     @mouseleave="sendMessage('STOP')"
+                     @touchstart.prevent="sendMessage('BACKWARD')"
+                     @touchend.prevent="sendMessage('STOP')"
+                     @touchcancel.prevent="sendMessage('STOP')">
+            BACK
+         </BaseButton>
 
-            <BaseButton @mousedown="sendMessage('FORWARD')"
-                        @mouseup="sendMessage('STOP')"
-                        @mouseleave="sendMessage('STOP')"
-                        @touchstart.prevent="sendMessage('FORWARD')"
-                        @touchend.prevent="sendMessage('STOP')"
-                        @touchcancel.prevent="sendMessage('STOP')">
-               FRONT
-            </BaseButton>
-         </div>
-      </footer>
+         <BaseButton class="w-20"
+                     @mousedown="sendMessage('FORWARD')"
+                     @mouseup="sendMessage('STOP')"
+                     @mouseleave="sendMessage('STOP')"
+                     @touchstart.prevent="sendMessage('FORWARD')"
+                     @touchend.prevent="sendMessage('STOP')"
+                     @touchcancel.prevent="sendMessage('STOP')">
+            FRONT
+         </BaseButton>
+      </div>
+   </footer>
 
-   </div>
 </template>
