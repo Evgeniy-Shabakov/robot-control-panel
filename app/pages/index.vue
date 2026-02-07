@@ -82,18 +82,18 @@ function sendMessage(message) {
             <BaseButton @mousedown="sendMessage('LEFT')"
                         @mouseup="sendMessage('STOP')"
                         @mouseleave="sendMessage('STOP')"
-                        @touchstart="sendMessage('LEFT')"
-                        @touchend="sendMessage('STOP')"
-                        @touchcancel="sendMessage('STOP')">
+                        @touchstart.prevent="sendMessage('LEFT')"
+                        @touchend.prevent="sendMessage('STOP')"
+                        @touchcancel.prevent="sendMessage('STOP')">
                LEFT
             </BaseButton>
 
             <BaseButton @mousedown="sendMessage('RIGHT')"
                         @mouseup="sendMessage('STOP')"
                         @mouseleave="sendMessage('STOP')"
-                        @touchstart="sendMessage('RIGHT')"
-                        @touchend="sendMessage('STOP')"
-                        @touchcancel="sendMessage('STOP')">
+                        @touchstart.prevent="sendMessage('RIGHT')"
+                        @touchend.prevent="sendMessage('STOP')"
+                        @touchcancel.prevent="sendMessage('STOP')">
                RIGHT
             </BaseButton>
          </div>
@@ -102,16 +102,18 @@ function sendMessage(message) {
             <BaseButton @mousedown="sendMessage('BACKWARD')"
                         @mouseup="sendMessage('STOP')"
                         @mouseleave="sendMessage('STOP')"
-                        @touchstart="sendMessage('BACKWARD')"
-                        @touchend="sendMessage('STOP')">
+                        @touchstart.prevent="sendMessage('BACKWARD')"
+                        @touchend.prevent="sendMessage('STOP')"
+                        @touchcancel.prevent="sendMessage('STOP')">
                BACK
             </BaseButton>
 
             <BaseButton @mousedown="sendMessage('FORWARD')"
                         @mouseup="sendMessage('STOP')"
                         @mouseleave="sendMessage('STOP')"
-                        @touchstart="sendMessage('FORWARD')"
-                        @touchend="sendMessage('STOP')">
+                        @touchstart.prevent="sendMessage('FORWARD')"
+                        @touchend.prevent="sendMessage('STOP')"
+                        @touchcancel.prevent="sendMessage('STOP')">
                FRONT
             </BaseButton>
          </div>
