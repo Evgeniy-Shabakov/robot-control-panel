@@ -1,12 +1,16 @@
 <script setup>
 
 const messages = ref([])
+const MESSAGES_MAX_LENGTH = 50
 const wsConnectionStatus = ref('Отключено')
 const connection = ref(null)
 
-const reversedMessages = computed(() => {
-   return [...messages.value].reverse()
-})
+function addMessage(newMessage) {
+   messages.value.unshift(newMessage)
+   if (messages.value.length > MESSAGES_MAX_LENGTH) {
+      messages.value.splice(MESSAGES_MAX_LENGTH)
+   }
+}
 
 findWebSocketAndConnect()
 
@@ -28,7 +32,7 @@ function findWebSocketAndConnect() {
          wsConnectionStatus.value = `WebSocket сервер подключен по адресу: ${wsUrl}`
 
          ws.onmessage = (event) => {
-            messages.value.push('Получено:      ' + event.data)
+            addMessage('Получено:      ' + event.data)
          }
 
          ws.onclose = () => {
@@ -46,12 +50,11 @@ function findWebSocketAndConnect() {
 
 function sendMessage(message) {
    if (!connection.value || connection.value.readyState !== WebSocket.OPEN) {
-      messages.value.push('Ошибка: соединение не установлено')
+      addMessage('Ошибка: соединение не установлено')
       return
    }
-
    connection.value.send(message)
-   messages.value.push(`Отправлено:  ${message}`)
+   addMessage(`Отправлено:  ${message}`)
 }
 </script>
 
@@ -63,7 +66,7 @@ function sendMessage(message) {
       <h4>Сообщения:</h4>
       <div class="text-sm border p-2 min-h-50 max-h-50 rounded-md overflow-auto">
          <ul>
-            <li v-for="(msg, index) in reversedMessages"
+            <li v-for="(msg, index) in messages"
                 :key="index"
                 class="whitespace-pre-wrap"
                 :class="{
