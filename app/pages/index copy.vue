@@ -81,6 +81,13 @@ function sendMessage(message) {
    addMessage(`Отправлено:  ${message}`)
 }
 
+function sendHttpRequest(url) {
+   axios.get(`http://${ipAddress.value}/${url}`)
+      .then(response => {
+         console.log('Данные:', response);
+      })
+   addMessage(`Отправлено: http://${ipAddress.value}/${url}`)   
+}
 </script>
 
 <template>
@@ -115,7 +122,7 @@ function sendMessage(message) {
 
    <footer class="fixed bottom-0 p-2 w-full flex gap-4 justify-between">
       <div class="flex gap-3 items-center">
-         <BaseButton class="w-20 h-20"
+         <!-- <BaseButton class="w-20 h-20"
                      @mousedown="sendMessage('LEFT')"
                      @mouseup="sendMessage('STOP')"
                      @mouseleave="sendMessage('STOP')"
@@ -123,9 +130,19 @@ function sendMessage(message) {
                      @touchend.prevent="sendMessage('STOP')"
                      @touchcancel.prevent="sendMessage('STOP')">
             LEFT
-         </BaseButton>
+         </BaseButton> -->
 
          <BaseButton class="w-20 h-20"
+                     @mousedown="sendHttpRequest('left')"
+                     @mouseup="sendHttpRequest('stop')"
+                     @mouseleave="sendHttpRequest('stop')"
+                     @touchstart.prevent="sendHttpRequest('left')"
+                     @touchend.prevent="sendHttpRequest('stop')"
+                     @touchcancel.prevent="sendHttpRequest('stop')">
+            LEFT
+         </BaseButton>
+
+         <!-- <BaseButton class="w-20 h-20"
                      @mousedown="sendMessage('RIGHT')"
                      @mouseup="sendMessage('STOP')"
                      @mouseleave="sendMessage('STOP')"
@@ -133,12 +150,21 @@ function sendMessage(message) {
                      @touchend.prevent="sendMessage('STOP')"
                      @touchcancel.prevent="sendMessage('STOP')">
             RIGHT
-         </BaseButton>
+         </BaseButton> -->
 
+         <BaseButton class="w-20 h-20"
+                     @mousedown="sendHttpRequest('right')"
+                     @mouseup="sendHttpRequest('stop')"
+                     @mouseleave="sendHttpRequest('stop')"
+                     @touchstart.prevent="sendHttpRequest('right')"
+                     @touchend.prevent="sendHttpRequest('stop')"
+                     @touchcancel.prevent="sendHttpRequest('stop')">
+            RIGHT
+         </BaseButton>
       </div>
 
       <div class="flex flex-col gap-3">
-         <BaseButton class="w-20 h-20"
+         <!-- <BaseButton class="w-20 h-20"
                      @mousedown="sendMessage('FORWARD')"
                      @mouseup="sendMessage('STOP')"
                      @mouseleave="sendMessage('STOP')"
@@ -146,15 +172,35 @@ function sendMessage(message) {
                      @touchend.prevent="sendMessage('STOP')"
                      @touchcancel.prevent="sendMessage('STOP')">
             FRONT
-         </BaseButton>
+         </BaseButton> -->
 
          <BaseButton class="w-20 h-20"
+                     @mousedown="sendHttpRequest('forward')"
+                     @mouseup="sendHttpRequest('stop')"
+                     @mouseleave="sendHttpRequest('stop')"
+                     @touchstart.prevent="sendHttpRequest('forward')"
+                     @touchend.prevent="sendHttpRequest('stop')"
+                     @touchcancel.prevent="sendHttpRequest('stop')">
+            FRONT
+         </BaseButton>
+
+         <!-- <BaseButton class="w-20 h-20"
                      @mousedown="sendMessage('BACKWARD')"
                      @mouseup="sendMessage('STOP')"
                      @mouseleave="sendMessage('STOP')"
                      @touchstart.prevent="sendMessage('BACKWARD')"
                      @touchend.prevent="sendMessage('STOP')"
                      @touchcancel.prevent="sendMessage('STOP')">
+            BACK
+         </BaseButton> -->
+
+         <BaseButton class="w-20 h-20"
+                     @mousedown="sendHttpRequest('backward')"
+                     @mouseup="sendHttpRequest('stop')"
+                     @mouseleave="sendHttpRequest('stop')"
+                     @touchstart.prevent="sendHttpRequest('backward')"
+                     @touchend.prevent="sendHttpRequest('stop')"
+                     @touchcancel.prevent="sendHttpRequest('stop')">
             BACK
          </BaseButton>
       </div>
