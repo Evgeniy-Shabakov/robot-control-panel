@@ -4,6 +4,7 @@ const messages = ref([])
 const MESSAGES_MAX_LENGTH = 50
 const wsConnectionStatus = ref('Отключено')
 const connection = ref(null)
+const ipAddress = ref('192.168.1.103')
 
 function addMessage(newMessage) {
    messages.value.unshift(newMessage)
@@ -12,7 +13,29 @@ function addMessage(newMessage) {
    }
 }
 
-findWebSocketAndConnect()
+function connectToIP() {
+   const ws = new WebSocket(`ws://${ipAddress.value}:81`)
+
+   ws.onopen = () => {
+      wsConnectionStatus.value = `WebSocket сервер подключен по адресу: ws://${ipAddress.value}:81`
+
+      ws.onmessage = (event) => {
+         addMessage('Получено:      ' + event.data)
+      }
+
+      ws.onclose = () => {
+         wsConnectionStatus.value = 'Отключено'
+      }
+
+      ws.onerror = () => {
+         wsConnectionStatus.value = 'Ошибка'
+      }
+
+      connection.value = ws
+   }
+}
+
+// findWebSocketAndConnect()
 
 function findWebSocketAndConnect() {
    const subnet = '192.168.1.'
@@ -60,7 +83,16 @@ function sendMessage(message) {
 
 <template>
 
-   <header class="border m-2 p-2 rounded-md">WebSocket статус: {{ wsConnectionStatus }}</header>
+   <header class="border m-2 p-2 rounded-md">
+      <input type="text"
+             v-model="ipAddress"
+             class="border p-1 rounded">
+      <BaseButton class="ml-2"
+                  @click="connectToIP">
+         Подключить
+      </BaseButton>
+      <div>WebSocket статус: {{ wsConnectionStatus }}</div>
+   </header>
 
    <main class="m-2">
       <h4>Сообщения:</h4>
